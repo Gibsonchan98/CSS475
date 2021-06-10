@@ -1,0 +1,197 @@
+CREATE TABLE USERS(
+	Uid int NOT NULL, 
+    	U_Fname varchar(40) NOT NULL,
+    	U_Lname varchar(40), 
+    	PRIMARY KEY(Uid)
+);
+
+create table EMPLOYEE (
+	Eid INT NOT NULL,
+	E_Fname VARCHAR(50) NOT NULL,
+	E_Minit VARCHAR(1),
+	E_Lname VARCHAR(50),
+	Salary INT,
+	DOB DATE NOT NULL, 
+	PRIMARY KEY(Eid)
+);
+
+create table RESTAURANT (
+	R_id INT NOT NULL,
+	Website_Link VARCHAR(1000),
+	Address VARCHAR(50),
+	City VARCHAR(50),
+	State VARCHAR(50),
+	Phone VARCHAR(50),
+	R_Name VARCHAR(50),
+	Rating DECIMAL(2,1),
+	Start_Time VARCHAR(50),
+	End_Time VARCHAR(50),
+	CONSTRAINT chk_City CHECK (City IN ('Seattle')),
+	CONSTRAINT chk_State CHECK (State IN ('Washington', 'WA')),
+	PRIMARY KEY(R_id)
+);
+
+create table REVIEW (
+	Rid INT NOT NULL,
+	Uid INT NOT NULL,
+	Rest_id INT NOT NULL,
+	Rev_desciption VARCHAR(300),
+	Rating INT NOT NULL,
+	Rev_date DATE NOT NULL,
+	U_Fname VARCHAR(40) NOT NULL,
+	U_Lname VARCHAR(40),
+	PRIMARY KEY(Rid), 
+	FOREIGN KEY(Uid) REFERENCES USERS(Uid),
+    FOREIGN KEY(Rest_id) REFERENCES RESTAURANT(Rest_id)
+);
+
+create table REMOVE (
+	Eid INT NOT NULL,
+	Rid INT NOT NULL,
+	Rest_id INT NOT NULL,
+	Uid INT NOT NULL,
+	R_description VARCHAR(300),
+	R_date DATE,
+	FOREIGN KEY(Eid) REFERENCES EMPLOYEE(Eid),
+	FOREIGN KEY(Rid) REFERENCES REVIEW(Rid),
+	FOREIGN KEY(Uid) REFERENCES USERS(Uid),
+	FOREIGN KEY(Rest_id) REFERENCES RESTAURANT(Rest_id)
+);
+
+create table UPDATES(
+	U_date date NOT NULL,
+	description varchar(300) NOT NULL,
+	Eid int NOT NULL,
+	Rid int NOT NULL,
+	FOREIGN KEY(Eid) REFERENCES EMPLOYEE(Eid),
+	FOREIGN KEY(Rid) REFERENCES REVIEW(Rid)
+);
+
+insert into USERS (Uid, U_Fname, U_Lname) values (1, 'Betsey', 'Jiggens');
+insert into USERS (Uid, U_Fname, U_Lname) values (2, 'Sosanna', 'Shrimptone');
+insert into USERS (Uid, U_Fname, U_Lname) values (3, 'Bil', 'Baudic');
+insert into USERS (Uid, U_Fname, U_Lname) values (4, 'Valaree', 'Folland');
+insert into USERS (Uid, U_Fname, U_Lname) values (5, 'Marcella', 'Reany');
+insert into USERS (Uid, U_Fname, U_Lname) values (6, 'Katherine', 'Rivalant');
+insert into USERS (Uid, U_Fname, U_Lname) values (7, 'Alfonso', 'Tassaker');
+insert into USERS (Uid, U_Fname, U_Lname) values (8, 'Vannie', 'Pendre');
+insert into USERS (Uid, U_Fname, U_Lname) values (9, 'Fletch', 'Garioch');
+insert into USERS (Uid, U_Fname, U_Lname) values (10, 'Hinze', 'Conlaund');
+insert into USERS (Uid, U_Fname, U_Lname) values (11, 'Nadine', 'Haydon');
+insert into USERS (Uid, U_Fname, U_Lname) values (12, 'Herc', 'Podmore');
+insert into USERS (Uid, U_Fname, U_Lname) values (13, 'Rana', 'Bowkley');
+insert into USERS (Uid, U_Fname, U_Lname) values (14, 'Cybil', 'Kneal');
+insert into USERS (Uid, U_Fname, U_Lname) values (15, 'Juliana', 'Traill');
+insert into USERS (Uid, U_Fname, U_Lname) values (16, 'Antony', 'Legg');
+insert into USERS (Uid, U_Fname, U_Lname) values (17, 'Brynn', 'Howlin');
+insert into USERS (Uid, U_Fname, U_Lname) values (18, 'Lilia', 'Outram');
+insert into USERS (Uid, U_Fname, U_Lname) values (19, 'Veda', 'Hastewell');
+insert into USERS (Uid, U_Fname, U_Lname) values (20, 'Lauren', 'Franken');
+
+
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (1, 'Micaela', 'P', 'Cunnane', 58027, 5/9/1976);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (2, 'Tuck', 'M', 'Skellington', 82827, 11/8/1970);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (3, 'Christiano', 'Z', 'Moberley', 82899, 11/24/1999);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (4, 'Jerad', 'M', 'Johanssen', 45137, 8/20/1962);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (5, 'Omar', 'T', 'Bridgewood', 82699, 8/13/1979);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (6, 'Willi', 'U', 'MacCartair', 69455, 12/12/1965);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (7, 'Linnie', 'I', 'Orrobin', 53656, 4/30/1994);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (8, 'Valry', 'C', 'Spriggen', 59810, 4/5/1973);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (9, 'Iggy', 'H', 'Goodspeed', 55009, 2/1/1988);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (10, 'Wally', 'K', 'Mangan', 79166, 1/15/1966);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (11, 'Jyoti', 'O', 'Duberry', 65583, 6/19/1961);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (12, 'Sigismundo', 'C', 'Waleworke', 57352, 4/17/1993);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (13, 'Shalom', 'R', 'Davis', 84098, 4/26/1995);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (14, 'Charles', 'N', 'Issac', 57946, 2/16/1979);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (15, 'Flossi', 'B', 'Shawcross', 71142, 4/30/1989);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (16, 'Gus', 'V', 'Kerfoot', 50489, 8/30/1988);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (17, 'Skylar', 'G', 'Soppit', 48800, 12/27/1986);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (18, 'Garland', 'B', 'Lethem', 72889, 9/15/1983);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (19, 'Eben', 'R', 'De Gouy', 65828, 6/21/1960);
+insert into EMPLOYEE (Eid, E_Fname, E_Minit, E_Lname, Salary, DOB) values (20, 'Kimmi', 'G', 'Given', 80049, 3/8/1972);
+
+
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (1, 'https://infoseek.co.jp', '410 Helena Park', 'Seattle', 'Washington', '5095377739', 'Oodoo', 2.0, '7:36 AM', '10:37 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (2, 'https://prweb.com', '04 Portage Way', 'Seattle', 'Washington', '5099677451', 'Zoonoodle', 1.9, '8:58 AM', '8:21 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (3, 'https://360.cn', '494 Oxford Place', 'Seattle', 'Washington', '2537687641', 'Photospace', 4.1, '8:41 AM', '8:23 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (4, 'http://bbc.co.uk', '4 Lien Junction', 'Seattle', 'Washington', '3603537455', 'Brainsphere', 4.4, '7:34 AM', '10:40 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (5, 'http://mapy.cz', '11 Oakridge Place', 'Seattle', 'Washington', '4251135924', 'Realpoint', 4.4, '5:36 AM', '7:28 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (6, 'https://fotki.com', '69 Carioca Lane', 'Seattle', 'Washington', '3602686988', 'Pixope', 4.0, '7:09 AM', '8:42 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (7, 'http://blog.com', '64 Little Fleur Parkway', 'Seattle', 'Washington', '3607604875', 'Thoughtbridge', 0.7, '6:09 AM', '7:19 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (8, 'http://scientificamerican.com', '01 Division Lane', 'Seattle', 'Washington', '2535075332', 'Agivu', 4.3, '5:19 AM', '7:38 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (9, 'https://marriott.com', '392 Thackeray Point', 'Seattle', 'Washington', '2067353834', 'Jatri', 2.6, '8:11 AM', '8:12 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (10, 'http://sohu.com', '4 Glendale Road', 'Seattle', 'Washington', '5097119152', 'Izio', 0.8, '8:38 AM', '9:07 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (11, 'https://bluehost.com', '98579 Arkansas Plaza', 'Seattle', 'Washington', '4256612561', 'Livefish', 3.1, '6:12 AM', '8:11 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (12, 'https://dropbox.com', '16 Green Ridge Plaza', 'Seattle', 'Washington', '3601586748', 'Photobug', 2.0, '7:45 AM', '8:27 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (13, 'https://timesonline.co.uk', '26 Linden Plaza', 'Seattle', 'Washington', '4251125181', 'Brightdog', 0.2, '8:43 AM', '10:44 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (14, 'http://facebook.com', '95 Golf Course Parkway', 'Seattle', 'Washington', '2062602452', 'Photobug', 4.9, '8:19 AM', '9:27 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (15, 'https://geocities.com', '669 Green Ridge Alley', 'Seattle', 'Washington', '2533922764', 'Riffpath', 4.5, '6:36 AM', '7:33 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (16, 'http://vkontakte.ru', '3838 Acker Parkway', 'Seattle', 'Washington', '2538936146', 'Quinu', 1.5, '7:37 AM', '10:42 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (17, 'http://telegraph.co.uk', '1 New Castle Plaza', 'Seattle', 'Washington', '5093334729', 'Wordtune', 1.0, '8:55 AM', '8:05 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (18, 'https://netlog.com', '70 Anniversary Lane', 'Seattle', 'Washington', '2065518054', 'Flipstorm', 0.1, '6:44 AM', '9:29 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (19, 'https://phpbb.com', '0 Marcy Parkway', 'Seattle', 'Washington', '2061574829', 'Devbug', 5.0, '6:11 AM', '7:39 PM');
+insert into RESTAURANT (Rest_id, Website_Link, Address, City, State, Phone, R_Name, Rating, Start_Time, End_Time) values (20, 'http://bbb.org', '71998 Bowman Drive', 'Seattle', 'Washington', '2067715980', 'Demimbu', 3.0, '7:55 AM', '7:27 PM');
+
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (1, 13, 10, 'Some description about the restaurant.', 1, 3/13/2020, 'Cynthia', 'Collomosse');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (2, 16, 2, 'Some description about the restaurant.', 0, 7/11/2018, 'Bessie', 'Abernethy');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (3, 14, 5, 'Some description about the restaurant.', 1, 9/1/2020, 'Paxon', 'Relf');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (4, 8, 4, 'Some description about the restaurant.', 1, 5/1/2020, 'Krystal', 'Lansdowne');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (5, 9, 14, 'Some description about the restaurant.', 5, 5/8/2021, 'Gael', 'Babbidge');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (6, 4, 16, 'Some description about the restaurant.', 3, 4/28/2018, 'Gene', 'Warwick');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (7, 2, 16, 'Some description about the restaurant.', 2, 6/4/2018, 'Filip', 'Hadenton');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (8, 2, 2, 'Some description about the restaurant.', 1, 9/8/2019, 'Filip', 'Hadenton');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (9, 6, 8, 'Some description about the restaurant.', 4, 10/19/2020, 'Felic', 'Carus');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (10, 14, 18, 'Some description about the restaurant.', 1, 1/21/2020, 'Paxon', 'Relf');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (11, 3, 9, 'Some description about the restaurant.', 3, 9/10/2017, 'Denis', 'Dutchburn');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (12, 11, 10, 'Some description about the restaurant.', 5, 8/27/2017, 'Augustine', 'Tidd');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (13, 1, 5, 'Some description about the restaurant.', 0, 10/5/2019, 'Ellerey', 'Donoghue');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (14, 20, 18, 'Some description about the restaurant.', 2, 11/18/2019, 'Joyann', 'Glennon');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (15, 18, 14, 'Some description about the restaurant.', 2, 3/19/2020, 'Marta', 'McGriele');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (16, 4, 12, 'Some description about the restaurant.', 4, 9/18/2018, 'Gene', 'Warwick');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (17, 15, 12, 'Some description about the restaurant.', 4, 12/12/2020, 'Wolfgang', 'Habben');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (18, 18, 18, 'Some description about the restaurant.', 3, 3/4/2019, 'Marta', 'McGriele');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (19, 5, 1, 'Some description about the restaurant.', 3, 2/20/2021, 'Romonda', 'Druce');
+insert into REVIEW (Rid, Uid, Rest_id, Rev_desciption, Rating, Rev_date, U_Fname, U_Lname) values (20, 4, 15, 'Some description about the restaurant.', 1, 6/9/2019, 'Gene', 'Warwick');
+
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (9, 9, 11, 12, 'Description for why the review was removed by the employee.', 4/26/2021);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (19, 17, 14, 10, 'Description for why the review was removed by the employee.', 9/7/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (20, 10, 5, 4, 'Description for why the review was removed by the employee.', 11/3/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (16, 11, 17, 18, 'Description for why the review was removed by the employee.', 1/2/2021);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (6, 8, 2, 16, 'Description for why the review was removed by the employee.', 10/20/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (13, 2, 7, 14, 'Description for why the review was removed by the employee.', 5/10/2021);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (16, 2, 2, 7, 'Description for why the review was removed by the employee.', 4/23/2021);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (11, 11, 14, 5, 'Description for why the review was removed by the employee.', 11/28/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (17, 20, 19, 5, 'Description for why the review was removed by the employee.', 9/27/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (12, 3, 20, 10, 'Description for why the review was removed by the employee.', 9/8/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (6, 14, 20, 14, 'Description for why the review was removed by the employee.', 2/18/2021);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (5, 1, 2, 1, 'Description for why the review was removed by the employee.', 2/9/2021);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (19, 19, 9, 4, 'Description for why the review was removed by the employee.', 8/7/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (1, 7, 20, 16, 'Description for why the review was removed by the employee.', 11/13/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (8, 13, 1, 10, 'Description for why the review was removed by the employee.', 12/27/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (11, 19, 13, 5, 'Description for why the review was removed by the employee.', 12/15/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (16, 10, 20, 8, 'Description for why the review was removed by the employee.', 5/20/2021);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (8, 20, 5, 10, 'Description for why the review was removed by the employee.', 8/15/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (15, 13, 5, 18, 'Description for why the review was removed by the employee.', 8/13/2020);
+insert into REMOVE (Eid, Rid, Rest_id, Uid, R_description, R_date) values (18, 18, 11, 14, 'Description for why the review was removed by the employee.', 12/14/2020);
+
+
+insert into UPDATES  (U_date, Description, Eid, Rid) values (12/8/2020, 'What the employee updated to the restaurant page.', 3, 16);
+insert into UPDATES (U_date, Description, Eid, Rid) values (10/19/2019, 'What the employee updated to the restaurant page.', 3, 5);
+insert into UPDATES (U_date, Description, Eid, Rid) values (7/25/2020, 'What the employee updated to the restaurant page.', 19, 16);
+insert into UPDATES (U_date, Description, Eid, Rid) values (2/20/2020, 'What the employee updated to the restaurant page.', 16, 9);
+insert into UPDATES (U_date, Description, Eid, Rid) values (10/21/2018, 'What the employee updated to the restaurant page.', 19, 1);
+insert into UPDATES (U_date, Description, Eid, Rid) values (5/27/2018, 'What the employee updated to the restaurant page.', 9, 7);
+insert into UPDATES (U_date, Description, Eid, Rid) values (5/1/2020, 'What the employee updated to the restaurant page.', 8, 9);
+insert into UPDATES (U_date, Description, Eid, Rid) values (11/18/2020, 'What the employee updated to the restaurant page.', 14, 17);
+insert into UPDATES (U_date, Description, Eid, Rid) values (11/18/2018, 'What the employee updated to the restaurant page.', 4, 4);
+insert into UPDATES (U_date, Description, Eid, Rid) values (10/27/2018, 'What the employee updated to the restaurant page.', 14, 13);
+insert into UPDATES (U_date, Description, Eid, Rid) values (9/14/2018, 'What the employee updated to the restaurant page.', 17, 10);
+insert into UPDATES (U_date, Description, Eid, Rid) values (11/15/2018, 'What the employee updated to the restaurant page.', 13, 8);
+insert into UPDATES (U_date, Description, Eid, Rid) values (5/21/2020, 'What the employee updated to the restaurant page.', 19, 3);
+insert into UPDATES (U_date, Description, Eid, Rid) values (3/4/2020, 'What the employee updated to the restaurant page.', 6, 10);
+insert into UPDATES (U_date, Description, Eid, Rid) values (4/8/2021, 'What the employee updated to the restaurant page.', 6, 14);
+insert into UPDATES (U_date, Description, Eid, Rid) values (2/25/2021, 'What the employee updated to the restaurant page.', 11, 16);
+insert into UPDATES (U_date, Description, Eid, Rid) values (12/29/2020, 'What the employee updated to the restaurant page.', 18, 4);
+insert into UPDATES (U_date, Description, Eid, Rid) values (2/8/2021, 'What the employee updated to the restaurant page.', 19, 14);
+insert into UPDATES (U_date, Description, Eid, Rid) values (2/16/2021, 'What the employee updated to the restaurant page.', 9, 6);
+insert into UPDATES (U_date, Description, Eid, Rid) values (2/3/2020, 'What the employee updated to the restaurant page.', 10, 12);

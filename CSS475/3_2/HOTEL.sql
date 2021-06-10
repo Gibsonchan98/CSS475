@@ -1,0 +1,142 @@
+Phoenix Copp, Melanie Palomino, Abdishakur Diriye
+
+
+CREATE TABLE HOTEL
+(hotelNo INT NOT NULL,
+hotelName VARCHAR(20),
+city VARCHAR(20),
+primary key(hotelNo)
+);
+
+CREATE TABLE  ROOM
+(roomNo INT NOT NULL,
+H_hotelNo INT NOT NULL,
+roomType VARCHAR(10) DEFAULT 'Standard',
+price decimal(5,2) NOT NULL,
+primary key(roomNo, H_hotelNo),
+CONSTRAINT fkHotelNo FOREIGN key (H_hotelNo) References HOTEL (hotelNo),
+CONSTRAINT price_range CHECK (price BETWEEN 50.00 and 500.00),
+CONSTRAINT roomNo_range CHECK (roomNo BETWEEN 1 and 9999),
+CONSTRAINT roomTypes CHECK (roomType IN('Standard', 'Suite', 'Penthouse', 'Double', 'Single'))
+);
+
+CREATE TABLE GUEST
+(
+guestNo INT NOT NULL,
+guestName VARCHAR(20) NOT NULL,
+guestAddress VARCHAR(30),
+primary key(guestNo)
+);
+
+CREATE TABLE BOOKING
+(H_hotelNo INT NOT NULL,
+G_guestNo INT NOT NULL,
+dateFrom DATE NOT NULL,
+dateTo DATE NOT NULL,
+R_roomNo INT NOT NULL,
+primary key (H_hotelNo, G_guestNo, R_roomNo, dateFrom),
+foreign key(G_guestNo) References GUEST(guestNo),
+foreign key(R_roomNo, H_hotelNo) References ROOM(roomNo, H_hotelNo),
+CONSTRAINT dateOrder Check (dateFrom < dateTo)
+);
+
+
+INSERT into HOTEL values (1, 'Death Inn', 'Seattle');
+INSERT into HOTEL values (2, 'Life Inn', 'Chicagi');
+INSERT into HOTEL values (3, 'Earth Inn', 'Olympia');
+INSERT into HOTEL values (4, 'World Inn', 'Bothell');
+INSERT into HOTEL values (5, 'Ocean Inn', 'Colombus');
+INSERT into HOTEL values (6, 'Hilton', 'Colombus');
+INSERT into HOTEL values (7, 'Ocean', 'Colombus');
+INSERT into HOTEL values (8, 'Ocean', 'Seattle');
+INSERT into HOTEL values (9, 'Ocean2', 'Las Vegas');
+INSERT into HOTEL values (10, 'Ocean3', 'Las Vegas');
+INSERT into HOTEL values (11, 'Hyatt Place', 'New Orleans');
+INSERT into HOTEL values (12, 'Hyatt Pace', 'Birmingham');
+INSERT into HOTEL values (13, 'Hyatt Place', 'Phoenix');
+INSERT into HOTEL values (14, 'Hyatt', 'Tucson');
+INSERT into HOTEL values (15, 'Hyatt', 'Minneapolis');
+INSERT into HOTEL values (16, 'Hilton', 'Bellevue');
+INSERT into HOTEL values (17, 'Hotel For Dogs', 'New York');
+INSERT into HOTEL values (18, 'Caesars Palace', 'Las Vegas');
+INSERT into HOTEL values (19, 'Bellagio Hotel', 'Las Vegas');
+INSERT into HOTEL values (20, 'The Langham', 'New York');
+INSERT into HOTEL values (21, 'Baccarat Hotel', 'New York');
+INSERT into HOTEL values (23, 'Lotte New York Palace', 'New York');
+INSERT into HOTEL values (24, 'The Roosevelt', 'New Orleans');
+INSERT into HOTEL values (25, 'Quarter House', 'New Orleans');
+INSERT INTO Hotel VALUES (22, 'Palace', 'Seattle');
+
+
+INSERT into ROOM values (100, 1, 'Double', 200);
+INSERT into ROOM values (200, 2, 'Suite', 200);
+INSERT into ROOM values (300, 3, 'Standard', 200);
+INSERT into ROOM values (100, 4, 'Single', 200);
+INSERT into ROOM values (200, 1, 'Standard', 200);
+INSERT into ROOM values (300, 17, 'Suite', 200.00);
+INSERT into ROOM values (105, 17, 'Single', 50.00);
+INSERT into ROOM values (100, 13, 'Double', 350.00);
+INSERT into ROOM values (700, 18, 'Suite', 500.00);
+INSERT into ROOM values (100, 14, 'Single', 100.00);
+INSERT into ROOM values (200, 12, 'Suite', 250.00);
+INSERT into ROOM values (108, 12, 'Standard', 140.00);
+INSERT INTO ROOM VALUES(30, 19, 'Suite', 270.00);
+INSERT INTO ROOM VALUES(31, 20, 'Standard', 190.00);
+INSERT INTO ROOM VALUES(32, 21, 'Suite', 265.00);
+INSERT into ROOM values (700, 10, 'Standard', 250);
+INSERT into ROOM values (600, 11, 'Standard', 200);
+INSERT into ROOM values (800, 11, 'Standard', 200);
+INSERT into ROOM values (600, 12, 'Double', 350);
+INSERT into ROOM values (500, 11, 'Standard', 200);
+INSERT into ROOM values (500, 10, 'Standard', 250);
+INSERT into ROOM values (200, 6, 'Suite', 450);
+
+
+INSERT into GUEST values (1, 'Maria Smith', 'Seattle, WA');
+INSERT into GUEST values (2, 'Bob Ross', 'Seattle, WA');
+INSERT into GUEST values (3, 'Conor McGregor', 'Brimingham, AL');
+INSERT into GUEST values (4, 'Tina Burger', '123 NE 888 Ave, Kent, WA');
+INSERT into GUEST values (5, 'Joe Biden', 'Washington, D.C.');
+INSERT into GUEST values (6, 'Michael Jordan', 'Washington, D.C.');
+INSERT into GUEST values (7, 'Scottie Pippen', 'Portlan, OR');
+INSERT into GUEST values (8, 'Steve Kerr', 'Dallas, TX');
+INSERT into GUEST values (9, 'LeBron James', 'New York, NY');
+INSERT into GUEST values (10, 'Kyrie Irving', 'Detriot, MI');
+INSERT into GUEST values (11, 'Kevin Durant', 'Maimi, FL');
+INSERT into GUEST values (12, 'Alex Caruso', 'Bellevue, WA');
+INSERT into GUEST values (13, 'Tiger Woods', 'Washington, D.c');
+INSERT into GUEST values (14, 'Jordan Speith', 'Kent, WA');
+INSERT into GUEST values (15, 'Joe Mama', 'Billings, MT');
+INSERT into GUEST values (16, 'Russell Wilson', 'Seattle, WA');
+INSERT into GUEST values (17, 'Matthew Stafford', 'Los Angeles, CA');
+INSERT into GUEST values (18, 'Matthew Ryan', 'Atlanta, GA');
+INSERT into GUEST values (19, 'Aaron Roges', 'New York, NY');
+INSERT into GUEST values (20, 'Tom Brady', 'Tampa Bay, FL');
+INSERT into GUEST values (21, 'Trevor Lawrence', 'Jacksonville, FL');
+INSERT into GUEST values (22, 'Baker Mayfield', 'Cleveland, OH');
+INSERT into GUEST values (23, 'Jim Bob', 'Washington, D.c');
+INSERT into GUEST values (24, 'George Washington', 'Kent, WA');
+INSERT into GUEST values (25, 'Barrack Obama', 'Billings, MT');
+
+
+INSERT into BOOKING values (1, 2, '2020-10-11', '2020-10-17', 200);
+INSERT into BOOKING values (1, 3, '2020-10-11', '2020-10-17', 100);
+INSERT into BOOKING values (2, 4, '2020-07-15', '2020-07-28', 200);
+INSERT into BOOKING values (2, 1, '2020-10-11', '2020-10-17', 200);
+INSERT into BOOKING values (3, 3, '2019-10-11', '2019-10-17', 300);
+INSERT into BOOKING values (18, 17, '2019-03-14', '2019-03-21', 700);
+INSERT into BOOKING values (14, 13, '2019-03-07', '2019-03-18', 100);
+INSERT into BOOKING values (6, 13, '2021-05-01', '2021-05-08', 200);
+
+INSERT into ROOM values (100, 17, 'Single', 150.00);
+INSERT into ROOM values (305, 17, 'Suite', 300.00); 
+INSERT into ROOM values (205, 17, 'Standard', 180.00); 
+INSERT into ROOM values (200, 17, 'Double', 210.00);  
+INSERT into BOOKING values (17, 21, '2021-03-07', '2021-05-18', 105);
+INSERT into BOOKING values (17, 22, '2021-05-01', '2021-05-10', 105);
+INSERT into BOOKING values (17, 2, '2021-05-01', '2021-05-10', 100);
+INSERT into BOOKING values (17, 12, '2021-05-01', '2021-05-10', 305);
+INSERT into BOOKING values (17, 15, '2021-05-01', '2021-05-10', 205);
+INSERT into BOOKING values (17, 8, '2021-05-01', '2021-05-10', 200);
+
+

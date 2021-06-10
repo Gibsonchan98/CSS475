@@ -1,0 +1,27 @@
+2. SELECT E.Fname as E_Fname, E.Lname as E_Lname, E.salary as E_salary, S.Fname as S_Fname, S.Lname as S_Lname
+FROM EMPLOYEE as E, EMPLOYEE as S, DEPARTMENT
+WHERE dname = 'Research' AND dnumber = E.dno AND E.super_ssn = S.Ssn; 
+
+3. SELECT dname as Department_Name, COUNT(*) as Number_of_Employees
+FROM DEPARTMENT, EMPLOYEE
+WHERE dno = dnumber AND salary > 32000
+Group by dname;
+
+4.SELECT dname as Department_Name, COUNT(*) as Number_of_Employees
+FROM DEPARTMENT, EMPLOYEE
+WHERE dno = dnumber 
+GROUP BY dname
+HAVING AVG(salary) > 32000; 
+
+5. SELECT pname as Project_Name, dname as Department_Name, COUNT (*) as Number_of_Employees, sum(hours) as Weekly_Hours
+FROM WORKS_ON, PROJECT, EMPLOYEE, DEPARTMENT 
+WHERE essn = Ssn AND pno = pnumber AND dnum = dnumber
+GROUP BY pname; 
+
+HOTEL 
+
+9. SELECT COUNT(*) as Number_of_Bookings, hotelName as Hotel_Name, city as Location
+FROM HOTEL, BOOKING
+WHERE H_hotelNo = hotelNo AND dateTo >= CURRENT_DATE
+GROUP BY city
+HAVING COUNT(*) >= 5; 
